@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>device</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >ASC-Tema1</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;device
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="device-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="device-module.html">Module device</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Niculescu Mihai</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">Modulul ce reprezinta un device.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">threading</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Event</tt><tt class="py-op">,</tt> <tt class="py-name">Thread</tt><tt class="py-op">,</tt> <tt class="py-name">Lock</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module barrier=barrier-module.html"><a title="barrier" class="py-name" href="#" onclick="return doclink('link-0', 'barrier', 'link-0');">barrier</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class barrier.ReusableBarrierCond=barrier.ReusableBarrierCond-class.html"><a title="barrier.ReusableBarrierCond" class="py-name" href="#" onclick="return doclink('link-1', 'ReusableBarrierCond', 'link-1');">ReusableBarrierCond</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module threadpool=threadpool-module.html"><a title="threadpool" class="py-name" href="#" onclick="return doclink('link-2', 'threadpool', 'link-2');">threadpool</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class threadpool.TreadPool=threadpool.TreadPool-class.html"><a title="threadpool.TreadPool" class="py-name" href="#" onclick="return doclink('link-3', 'TreadPool', 'link-3');">TreadPool</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="Device"></a><div id="Device-def"><a name="L11"></a><tt class="py-lineno"> 11</tt> <a class="py-toggle" href="#" id="Device-toggle" onclick="return toggle('Device');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="device.Device-class.html">Device</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Device-expanded"><a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    Class that represents a device.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="Device.__init__"></a><div id="Device.__init__-def"><a name="L16"></a><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="Device.__init__-toggle" onclick="return toggle('Device.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.Device-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device_id</tt><tt class="py-op">,</tt> <tt class="py-param">sensor_data</tt><tt class="py-op">,</tt> <tt class="py-param">supervisor</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Device.__init__-expanded"><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">        @type device_id: Integer</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">        @param device_id: the unique id of this node; between 0 and N-1</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">        @type sensor_data: List of (Integer, Float)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">        @param sensor_data: a list containing (location, data) as measured by this device</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">        @type supervisor: Supervisor</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">        @param supervisor: the testing infrastructure's control and validation component</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device_id</tt> <tt class="py-op">=</tt> <tt class="py-name">device_id</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Variable test.Location.sensor_data=test.Location-class.html#sensor_data"><a title="test.Location.sensor_data" class="py-name" href="#" onclick="return doclink('link-4', 'sensor_data', 'link-4');">sensor_data</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="test.Location.sensor_data" class="py-name" href="#" onclick="return doclink('link-5', 'sensor_data', 'link-4');">sensor_data</a></tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module supervisor=supervisor-module.html"><a title="supervisor" class="py-name" href="#" onclick="return doclink('link-6', 'supervisor', 'link-6');">supervisor</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="supervisor" class="py-name" href="#" onclick="return doclink('link-7', 'supervisor', 'link-6');">supervisor</a></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timepoint_done</tt> <tt class="py-op">=</tt> <tt class="py-name">Event</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-comment"># indica daca un device a inceput unui timepoint</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-comment"># permite primirea de script-uri dupa ce primiste vecini si isi seteaza cele 8 thread-uri</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">start</tt> <tt class="py-op">=</tt> <tt class="py-name">Event</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">scripts</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="barrier" class="py-name" href="#" onclick="return doclink('link-8', 'barrier', 'link-0');">barrier</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-comment"># pentru fiecare locatie o sa existe un lock, asta ca sa asigure ca doar un device</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-comment"># poate sa prelucreze datele</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">protect_data</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="Device.__str__"></a><div id="Device.__str__-def"><a name="L45"></a><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="Device.__str__-toggle" onclick="return toggle('Device.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.Device-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Device.__str__-expanded"><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">        Pretty prints this device.</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: String</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a string containing the id of this device</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"Device %d"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device_id</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="Device.setup_devices"></a><div id="Device.setup_devices-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="Device.setup_devices-toggle" onclick="return toggle('Device.setup_devices');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.Device-class.html#setup_devices">setup_devices</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">devices</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device.setup_devices-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Device.setup_devices-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">        Setup the devices before simulation begins.</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">        @type devices: List of Device</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        @param devices: list containing all devices</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-comment"># device-ul cu id : 0 va seta pentru toate bariera si lock-urile</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device_id</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">            <tt id="link-9" class="py-name"><a title="barrier" class="py-name" href="#" onclick="return doclink('link-9', 'barrier', 'link-0');">barrier</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="barrier.ReusableBarrierCond" class="py-name" href="#" onclick="return doclink('link-10', 'ReusableBarrierCond', 'link-1');">ReusableBarrierCond</a></tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name" targets="Variable test.Encounter.devices=test.Encounter-class.html#devices"><a title="test.Encounter.devices" class="py-name" href="#" onclick="return doclink('link-11', 'devices', 'link-11');">devices</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-name">protect_data</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-comment"># identificarea tuturilor locatilor pentru care exista date</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt id="link-12" class="py-name" targets="Module device=device-module.html,Variable test.ScriptTestData.device=test.ScriptTestData-class.html#device"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-12', 'device', 'link-12');">device</a></tt> <tt class="py-keyword">in</tt> <tt id="link-13" class="py-name"><a title="test.Encounter.devices" class="py-name" href="#" onclick="return doclink('link-13', 'devices', 'link-11');">devices</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt id="link-14" class="py-name" targets="Variable supervisor.ScriptRunData.location=supervisor.ScriptRunData-class.html#location,Variable test.ScriptTestData.location=test.ScriptTestData-class.html#location"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-14', 'location', 'link-14');">location</a></tt><tt class="py-op">,</tt> <tt class="py-name">_</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-15" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-15', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="test.Location.sensor_data" class="py-name" href="#" onclick="return doclink('link-16', 'sensor_data', 'link-4');">sensor_data</a></tt><tt class="py-op">.</tt><tt class="py-name">iteritems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt id="link-17" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-17', 'location', 'link-14');">location</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">protect_data</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                        <tt class="py-name">protect_data</tt><tt class="py-op">[</tt><tt id="link-18" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-18', 'location', 'link-14');">location</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">Lock</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt id="link-19" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-19', 'device', 'link-12');">device</a></tt> <tt class="py-keyword">in</tt> <tt id="link-20" class="py-name"><a title="test.Encounter.devices" class="py-name" href="#" onclick="return doclink('link-20', 'devices', 'link-11');">devices</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt id="link-21" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-21', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="barrier" class="py-name" href="#" onclick="return doclink('link-22', 'barrier', 'link-0');">barrier</a></tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="barrier" class="py-name" href="#" onclick="return doclink('link-23', 'barrier', 'link-0');">barrier</a></tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                <tt id="link-24" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-24', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">protect_data</tt> <tt class="py-op">=</tt> <tt class="py-name">protect_data</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                <tt id="link-25" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-25', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">thread</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name" targets="Class device.DeviceThread=device.DeviceThread-class.html"><a title="device.DeviceThread" class="py-name" href="#" onclick="return doclink('link-26', 'DeviceThread', 'link-26');">DeviceThread</a></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-27', 'device', 'link-12');">device</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                <tt id="link-28" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-28', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">start</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="Device.assign_script"></a><div id="Device.assign_script-def"><a name="L78"></a><tt class="py-lineno"> 78</tt> <a class="py-toggle" href="#" id="Device.assign_script-toggle" onclick="return toggle('Device.assign_script');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.Device-class.html#assign_script">assign_script</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">script</tt><tt class="py-op">,</tt> <tt class="py-param">location</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device.assign_script-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Device.assign_script-expanded"><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        Provide a script for the device to execute.</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        @type script: Script</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        @param script: the script to execute from now on at each timepoint; None if the</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">            current timepoint has ended</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">        @type location: Integer</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">        @param location: the location for which the script is interested in</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-comment"># asteapta pana a primit vecini si thread pool este poate sa primiesca noi script-uri</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">start</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method barrier.ReusableBarrierCond.wait()=barrier.ReusableBarrierCond-class.html#wait"><a title="barrier.ReusableBarrierCond.wait" class="py-name" href="#" onclick="return doclink('link-29', 'wait', 'link-29');">wait</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-30" class="py-name" targets="Variable supervisor.ScriptRunData.script=supervisor.ScriptRunData-class.html#script"><a title="supervisor.ScriptRunData.script" class="py-name" href="#" onclick="return doclink('link-30', 'script', 'link-30');">script</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method device.DeviceThread.add_task()=device.DeviceThread-class.html#add_task,Method threadpool.TreadPool.add_task()=threadpool.TreadPool-class.html#add_task"><a title="device.DeviceThread.add_task
+threadpool.TreadPool.add_task" class="py-name" href="#" onclick="return doclink('link-31', 'add_task', 'link-31');">add_task</a></tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="supervisor.ScriptRunData.script" class="py-name" href="#" onclick="return doclink('link-32', 'script', 'link-30');">script</a></tt><tt class="py-op">,</tt> <tt id="link-33" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-33', 'location', 'link-14');">location</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">scripts</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="supervisor.ScriptRunData.script" class="py-name" href="#" onclick="return doclink('link-34', 'script', 'link-30');">script</a></tt><tt class="py-op">,</tt> <tt id="link-35" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-35', 'location', 'link-14');">location</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timepoint_done</tt><tt class="py-op">.</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="Device.get_data"></a><div id="Device.get_data-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="Device.get_data-toggle" onclick="return toggle('Device.get_data');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.Device-class.html#get_data">get_data</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">location</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device.get_data-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Device.get_data-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        Returns the pollution value this device has for the given location.</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        @type location: Integer</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        @param location: a location for which obtain the data</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: Float</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">        @return: the pollution value</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="test.Location.sensor_data" class="py-name" href="#" onclick="return doclink('link-36', 'sensor_data', 'link-4');">sensor_data</a></tt><tt class="py-op">[</tt><tt id="link-37" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-37', 'location', 'link-14');">location</a></tt><tt class="py-op">]</tt> <tt class="py-keyword">if</tt> <tt id="link-38" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-38', 'location', 'link-14');">location</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="test.Location.sensor_data" class="py-name" href="#" onclick="return doclink('link-39', 'sensor_data', 'link-4');">sensor_data</a></tt> <tt class="py-keyword">else</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="Device.set_data"></a><div id="Device.set_data-def"><a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="Device.set_data-toggle" onclick="return toggle('Device.set_data');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.Device-class.html#set_data">set_data</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">location</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device.set_data-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Device.set_data-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        Sets the pollution value stored by this device for the given location.</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        @type location: Integer</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        @param location: a location for which to set the data</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        @type data: Float</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        @param data: the pollution value</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-40" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-40', 'location', 'link-14');">location</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="test.Location.sensor_data" class="py-name" href="#" onclick="return doclink('link-41', 'sensor_data', 'link-4');">sensor_data</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="test.Location.sensor_data" class="py-name" href="#" onclick="return doclink('link-42', 'sensor_data', 'link-4');">sensor_data</a></tt><tt class="py-op">[</tt><tt id="link-43" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-43', 'location', 'link-14');">location</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">data</tt> </tt>
+</div><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="Device.shutdown"></a><div id="Device.shutdown-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="Device.shutdown-toggle" onclick="return toggle('Device.shutdown');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.Device-class.html#shutdown">shutdown</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Device.shutdown-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Device.shutdown-expanded"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">        Instructs the device to shutdown (terminate all threads). This method</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">        is invoked by the tester. This method must block until all the threads</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">        started by this device terminate.</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method threadpool.TreadPool.join()=threadpool.TreadPool-class.html#join"><a title="threadpool.TreadPool.join" class="py-name" href="#" onclick="return doclink('link-44', 'join', 'link-44');">join</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="DeviceThread"></a><div id="DeviceThread-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="DeviceThread-toggle" onclick="return toggle('DeviceThread');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="device.DeviceThread-class.html">DeviceThread</a><tt class="py-op">(</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DeviceThread-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DeviceThread-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">    Class that implements the device's worker thread.</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"> </tt>
+<a name="DeviceThread.__init__"></a><div id="DeviceThread.__init__-def"><a name="L137"></a><tt class="py-lineno">137</tt> <a class="py-toggle" href="#" id="DeviceThread.__init__-toggle" onclick="return toggle('DeviceThread.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.DeviceThread-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DeviceThread.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DeviceThread.__init__-expanded"><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor.</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        @type device: Device</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">        @param device: the device which owns this thread</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Method barrier.ReusableBarrierCond.__init__()=barrier.ReusableBarrierCond-class.html#__init__,Method device.Device.__init__()=device.Device-class.html#__init__,Method device.DeviceThread.__init__()=device.DeviceThread-class.html#__init__,Method supervisor.DeviceRunData.__init__()=supervisor.DeviceRunData-class.html#__init__,Method supervisor.Runtime.__init__()=supervisor.Runtime-class.html#__init__,Method supervisor.Script.__init__()=supervisor.Script-class.html#__init__,Method supervisor.Supervisor.__init__()=supervisor.Supervisor-class.html#__init__,Method test.TestCase.__init__()=test.TestCase-class.html#__init__,Method test.TestParams.__init__()=test.TestParams-class.html#__init__,Method tester.Tester.__init__()=tester.Tester-class.html#__init__,Method threadpool.TreadPool.__init__()=threadpool.TreadPool-class.html#__init__,Method threadpool.WorkerThread.__init__()=threadpool.WorkerThread-class.html#__init__"><a title="barrier.ReusableBarrierCond.__init__
+device.Device.__init__
+device.DeviceThread.__init__
+supervisor.DeviceRunData.__init__
+supervisor.Runtime.__init__
+supervisor.Script.__init__
+supervisor.Supervisor.__init__
+test.TestCase.__init__
+test.TestParams.__init__
+tester.Tester.__init__
+threadpool.TreadPool.__init__
+threadpool.WorkerThread.__init__" class="py-name" href="#" onclick="return doclink('link-45', '__init__', 'link-45');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">=</tt><tt class="py-string">"Device Thread %d"</tt> <tt class="py-op">%</tt> <tt id="link-46" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-46', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">device_id</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-47', 'device', 'link-12');">device</a></tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-48', 'device', 'link-12');">device</a></tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-comment"># utilizat ca un device sa ruleze in paralel script-urile</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread_pool</tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name"><a title="threadpool.TreadPool" class="py-name" href="#" onclick="return doclink('link-49', 'TreadPool', 'link-3');">TreadPool</a></tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-50', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">protect_data</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt>
+<a name="DeviceThread.add_task"></a><div id="DeviceThread.add_task-def"><a name="L149"></a><tt class="py-lineno">149</tt> <a class="py-toggle" href="#" id="DeviceThread.add_task-toggle" onclick="return toggle('DeviceThread.add_task');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.DeviceThread-class.html#add_task">add_task</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">script</tt><tt class="py-op">,</tt> <tt class="py-param">location</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DeviceThread.add_task-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DeviceThread.add_task-expanded"><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">        Adauga un nou task de executat.</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        @type script: Script</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">        @param script: the script to execute from now on at each timepoint; None if the</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">            current timepoint has ended</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">        @type location: Integer</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">        @param location: the location for which the script is interested in</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread_pool</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="device.DeviceThread.add_task
+threadpool.TreadPool.add_task" class="py-name" href="#" onclick="return doclink('link-51', 'add_task', 'link-31');">add_task</a></tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="supervisor.ScriptRunData.script" class="py-name" href="#" onclick="return doclink('link-52', 'script', 'link-30');">script</a></tt><tt class="py-op">,</tt> <tt id="link-53" class="py-name"><a title="supervisor.ScriptRunData.location
+test.ScriptTestData.location" class="py-name" href="#" onclick="return doclink('link-53', 'location', 'link-14');">location</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="DeviceThread.run"></a><div id="DeviceThread.run-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="DeviceThread.run-toggle" onclick="return toggle('DeviceThread.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="device.DeviceThread-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DeviceThread.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DeviceThread.run-expanded"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">True</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt class="py-comment"># get the current neighbourhood</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">            <tt class="py-name">neighbours</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-54', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="supervisor" class="py-name" href="#" onclick="return doclink('link-55', 'supervisor', 'link-6');">supervisor</a></tt><tt class="py-op">.</tt><tt id="link-56" class="py-name" targets="Method supervisor.Runtime.get_neighbours()=supervisor.Runtime-class.html#get_neighbours,Method supervisor.Supervisor.get_neighbours()=supervisor.Supervisor-class.html#get_neighbours"><a title="supervisor.Runtime.get_neighbours
+supervisor.Supervisor.get_neighbours" class="py-name" href="#" onclick="return doclink('link-56', 'get_neighbours', 'link-56');">get_neighbours</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">neighbours</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread_pool</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name" targets="Method threadpool.TreadPool.end_work()=threadpool.TreadPool-class.html#end_work"><a title="threadpool.TreadPool.end_work" class="py-name" href="#" onclick="return doclink('link-57', 'end_work', 'link-57');">end_work</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">            <tt class="py-name">neighbours</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-58', 'device', 'link-12');">device</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread_pool</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Method threadpool.TreadPool.start_work()=threadpool.TreadPool-class.html#start_work"><a title="threadpool.TreadPool.start_work" class="py-name" href="#" onclick="return doclink('link-59', 'start_work', 'link-59');">start_work</a></tt><tt class="py-op">(</tt><tt class="py-name">neighbours</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-60', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">scripts</tt><tt class="py-op">)</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">            <tt class="py-comment"># indica faptul ca un device poate sa primiesca noi script-uri</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-61', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">start</tt><tt class="py-op">.</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-62', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">timepoint_done</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="barrier.ReusableBarrierCond.wait" class="py-name" href="#" onclick="return doclink('link-63', 'wait', 'link-29');">wait</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt class="py-comment"># este sa se termine de executat toate task-urilre pentru respectivul timepoint</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thread_pool</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="threadpool.TreadPool.join" class="py-name" href="#" onclick="return doclink('link-64', 'join', 'link-44');">join</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-65', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">timepoint_done</tt><tt class="py-op">.</tt><tt class="py-name">clear</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-66', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt class="py-name">start</tt><tt class="py-op">.</tt><tt class="py-name">clear</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">            <tt class="py-comment"># astept ca toate device-urile sa termine timepoint-ul curent</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="device
+test.ScriptTestData.device" class="py-name" href="#" onclick="return doclink('link-67', 'device', 'link-12');">device</a></tt><tt class="py-op">.</tt><tt id="link-68" class="py-name"><a title="barrier" class="py-name" href="#" onclick="return doclink('link-68', 'barrier', 'link-0');">barrier</a></tt><tt class="py-op">.</tt><tt id="link-69" class="py-name"><a title="barrier.ReusableBarrierCond.wait" class="py-name" href="#" onclick="return doclink('link-69', 'wait', 'link-29');">wait</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >ASC-Tema1</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Wed Mar 27 15:34:32 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

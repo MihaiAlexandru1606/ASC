@@ -1,0 +1,75 @@
+
+ ______  ____    ____        ______                                   _
+/\  _  \/\  _`\ /\  _`\     /\__  _\                                /' \
+\ \ \L\ \ \,\L\_\ \ \/\_\   \/_/\ \/    __    ___ ___      __      /\_, \
+ \ \  __ \/_\__ \\ \ \/_/_     \ \ \  /'__`\/' __` __`\  /'__`\    \/_/\ \
+  \ \ \/\ \/\ \L\ \ \ \L\ \     \ \ \/\  __//\ \/\ \/\ \/\ \L\.\_     \ \ \
+   \ \_\ \_\ `\____\ \____/      \ \_\ \____\ \_\ \_\ \_\ \__/.\_\     \ \_\
+    \/_/\/_/\/_____/\/___/        \/_/\/____/\/_/\/_/\/_/\/__/\/_/      \/_/
+
+---------------------  Arhitectura sistemelor de calcul -----------------------
+
+Tema 1 : HashTable
+Nume : Niculescu
+Prenume : Mihai Alexandru
+Grupa : 335CB
+Sistem de operare : Ubuntu 18.04 LTS 64bit
+Editor : PyCharm
+Fisiere : gpu_hashtable.cu gpu_hashtable.hpp Makefile README
+
+--------------------------------------------------------------------------------
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Implementare   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Algritmul este destul de simplu: am mai multe functi de hash, mai intai incarc
+sloturile indicate de ele, apoi de la 0 pana size. Pentru a face eficet alocarea
+de spatiu: mai intai calculeaza valiarie care vor fi doar reinnote, aceste sunt
+scazute din numaul toatal, daca depaste suma jumatate din dimesiuna hash se face
+o reshape cu 1.5 * size;
+Get urmarete algoritmul de insert.
+Sunt alocate pe VRAM , cudaMallocMangen, in verctor de key si unu de valuri si
+cotorul.
+
+pe hpsl-wn01:
+Output la performantele obtinute si pe ce cluster s-a rulat:
+('HASH_BATCH_INSERT, 100000, inf, 61.2344', ' OK')
+('HASH_BATCH_GET, 100000, inf, 61.2344', ' OK')
+Test T1 20/20
+
+('HASH_BATCH_INSERT, 2000000, 28.5714, 60.7443', ' OK')
+('HASH_BATCH_GET, 2000000, 66.6667, 60.7443', ' OK')
+Test T2 20/20
+
+('HASH_BATCH_INSERT, 800000, 40, 61.2276', ' OK')
+('HASH_BATCH_INSERT, 800000, 26.6667, 61.2269', ' OK')
+('HASH_BATCH_INSERT, 800000, 13.3333, 72.8932', ' OK')
+('HASH_BATCH_INSERT, 800000, 20, 61.2265', ' OK')
+('HASH_BATCH_INSERT, 800000, 13.3333, 60.7443', ' OK')
+('HASH_BATCH_GET, 800000, inf, 60.7443', ' OK')
+('HASH_BATCH_GET, 800000, 80, 60.7443', ' OK')
+('HASH_BATCH_GET, 800000, 40, 60.7443', ' OK')
+('HASH_BATCH_GET, 800000, 80, 60.7443', ' OK')
+('HASH_BATCH_GET, 800000, 40, 60.7443', ' OK')
+Test T3 10/10
+
+('HASH_BATCH_INSERT, 10000000, 33.3333, 60.2659', ' OK')
+('HASH_BATCH_GET, 10000000, 71.4286, 60.2659', ' OK')
+Test T4 20/20
+
+('HASH_BATCH_INSERT, 2000000, 33.3333, 60.7443', ' OK')
+('HASH_BATCH_INSERT, 2000000, 25, 60.7443', ' OK')
+('HASH_BATCH_INSERT, 2000000, 9.52381, 72.3192', ' OK')
+('HASH_BATCH_INSERT, 2000000, 16.6667, 60.7442', ' OK')
+('HASH_BATCH_INSERT, 2000000, 13.3333, 60.2659', ' OK')
+('HASH_BATCH_GET, 2000000, 66.6667, 60.2659', ' OK')
+('HASH_BATCH_GET, 2000000, 66.6667, 60.2659', ' OK')
+('HASH_BATCH_GET, 2000000, 50, 60.2659', ' OK')
+('HASH_BATCH_GET, 2000000, 100, 60.2659', ' OK')
+('HASH_BATCH_GET, 2000000, 66.6667, 60.2659', ' OK')
+Test T5 20/20
+
+
+TOTAL gpu_hashtable  90/90
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

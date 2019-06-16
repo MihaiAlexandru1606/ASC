@@ -1,0 +1,367 @@
+ ______  ____    ____        ______  ____             ______          ___
+/\  _  \/\  _`\ /\  _`\     /\__  _\/\  _`\   /'\_/`\/\  _  \       /'___`\
+\ \ \L\ \ \,\L\_\ \ \/\_\   \/_/\ \/\ \ \L\_\/\      \ \ \L\ \     /\_\ /\ \
+ \ \  __ \/_\__ \\ \ \/_/_     \ \ \ \ \  _\L\ \ \__\ \ \  __ \    \/_/// /__
+  \ \ \/\ \/\ \L\ \ \ \L\ \     \ \ \ \ \ \L\ \ \ \_/\ \ \ \/\ \      // /_\ \
+   \ \_\ \_\ `\____\ \____/      \ \_\ \ \____/\ \_\\ \_\ \_\ \_\    /\______/
+    \/_/\/_/\/_____/\/___/        \/_/  \/___/  \/_/ \/_/\/_/\/_/    \/_____/
+
+ /'\_/`\          /\ \__         __
+/\      \     __  \ \ ,_\  _ __ /\_\   __  _
+\ \ \__\ \  /'__`\ \ \ \/ /\`'__\/\ \ /\ \/'\
+ \ \ \_/\ \/\ \L\.\_\ \ \_\ \ \/ \ \ \\/>  </
+  \ \_\\ \_\ \__/.\_\\ \__\\ \_\  \ \_\/\_/\_\
+   \/_/ \/_/\/__/\/_/ \/__/ \/_/   \/_/\//\/_/
+
+
+                  ___    __                ___                         __
+ /'\_/`\         /\_ \  /\ \__  __        /\_ \    __                 /\ \__  __
+/\      \  __  __\//\ \ \ \ ,_\/\_\  _____\//\ \  /\_\    ___     __  \ \ ,_\/\_\    ___     ___
+\ \ \__\ \/\ \/\ \ \ \ \ \ \ \/\/\ \/\ '__`\\ \ \ \/\ \  /'___\ /'__`\ \ \ \/\/\ \  / __`\ /' _ `\
+ \ \ \_/\ \ \ \_\ \ \_\ \_\ \ \_\ \ \ \ \L\ \\_\ \_\ \ \/\ \__//\ \L\.\_\ \ \_\ \ \/\ \L\ \/\ \/\ \
+  \ \_\\ \_\ \____/ /\____\\ \__\\ \_\ \ ,__//\____\\ \_\ \____\ \__/.\_\\ \__\\ \_\ \____/\ \_\ \_\
+   \/_/ \/_/\/___/  \/____/ \/__/ \/_/\ \ \/ \/____/ \/_/\/____/\/__/\/_/ \/__/ \/_/\/___/  \/_/\/_/
+                                       \ \_\
+                                        \/_/
+
+---------------------  Arhitectura sistemelor de calcul -----------------------
+
+Tema 2 : Matrix Multiplication
+Nume : Niculescu
+Prenume : Mihai Alexandru
+Grupa : 335CB
+Sistem de operare : Ubuntu 18.04 LTS 64bit
+Editor : CLion
+Fisiere :
+
+--------------------------------------------------------------------------------
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Matematica   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    Cum tema este despre inmultirea de matrici, trebui sa existe o analiza d.p.v
+"matematica", lucru care nu tine de cursul de ASC, deci nu poate sa fie
+considerat optimizare. Una este cod neoptimizat, alta este cod idiot. La acest
+curs, am invatat cum sa optimizam un cod care nu calculeaza de doua ori acelasi
+lucru, care nu aduma ceva de genul a += 0 * a + 0 * b + 0 * c + 0 * d, Deci un
+cod care nu face lucruri inutile. De acea cred ca trebui sa existe o analiza a
+formulei inainte de inceprerea optimizari.
+
+    Fomula de baza : C = (zerotr(TRANSPOSE(A) * B + TRANSPOSE(B) * A )) ^ 2
+
+    O propiretate a transpuneri de marici este : A = TRANSPOSE ( TRANSPOSE (A) )
+    O alta priorietate este : TRANSPOSE(A) * TRANSPOSE(B) = TRANSPOSE (B * A)
+    Rescriem relatia : TRANSPOSE(A) * B + TRANSPOSE(B) * A  =>
+
+    TRANSPOSE(A) * B + TRANSPOSE(B) * A = TRANSPOSE(A) * B + TRANSPOSE(B) *
+TRANSPOSE( TRANSPOSE(A) ) = TRANSPOSE(A) * B + TRANSPOSE ( TRANSPOSE(A) * B )
+
+    Notam cu D = TRANSPOSE(A) * B => formula este :
+                                            C = (zerotr(D + TRANSPOSE(D) )) ^ 2
+    Notam cu E = zerotr(D + TRANSPOSE(D) ) => C = E * E.
+
+    Din rescrierea formulei rezulta ca trebui sa calculam decat o data matria,
+apoi sa o transpunem. Cum E este suma dintre o matrice si transpusa sa => ca
+poate sa fie calculata cand este calculata si D. Elementele lui E sunt de forma:
+e[i][j] = d[i][j] + d[j][i], ∀ i, j; i <= j pt restul este 0, din cauza aplicari
+zerotr aspra rezultatului.
+
+Deci elementele lui e sunt de forma
+
+              | d[i][j] + d[j][i] , i <= j
+    e[i][j] = |
+              | 0, i > j
+
+    De aceia cand se calculeaza D, se poate calcula defapt E, repectand forma ei
+descrisa mai sus.
+
+    Cum E este o matrice superior triungiulara si cum pe orice programator care
+nu a facut ASC nu-l intereseaza sa inmulteaza ceva cu zero, formula pt ridicarea
+unei matrici de acesta forma este diferita(am invatat-o la MN in anul I), eu o
+s-o deduc aici:
+
+    E este de forma:
+        +---------------------------------------+
+        |e[1][1]  e[1][2]  e[1][3].......e[1][n]|
+        |   0     e[2][2]  e[2][3].......e[2][n]|
+    E = |   0         0    e[3][3].......e[3][n]|
+        |   :         :       :             :   |
+        |   0         0       0..........e[n][n]|
+        +---------------------------------------+
+
+    Cand ridicam la patrat o sa arate de forma:
+
++---------------------------------------+     +---------------------------------------+
+|e[1][1]  e[1][2]  e[1][3].......e[1][n]|     |e[1][1]  e[1][2]  e[1][3].......e[1][n]|
+|   0     e[2][2]  e[2][3].......e[2][n]|     |   0     e[2][2]  e[2][3].......e[2][n]|
+|   0         0    e[3][3].......e[3][n]|  *  |   0         0    e[3][3].......e[3][n]|
+|   :         :       :             :   |     |   :         :       :             :   |
+|   0         0       0..........e[n][n]|     |   0         0       0..........e[n][n]|
++---------------------------------------+     +---------------------------------------+
+
+Din acesta se poate observa ca nu ne intereza elemnetre care au i > j => ca in
+momentul in care aplicam c[i][j] += e[i][k] * e[k][j] (inmultirea efectiva),
+trebui ca k >= i si k <= j, cele de sub diagonala principala sunt 0 =>k ∈ [i, j]
+Cum c[i][j] pt i > j o sa fie tot 0, din inmultirea a doua matrici triungiulare
+rezulta tot o matrice triungiulara => j >= i => j ∈ [i, n - 1].
+
+ Fomula prntru a calcula c in functie de e este:
+
+                  j
+    c[i][j] =     ∑  e[i][k] * e[k][
+                k = i
+
+               |    j
+               |    ∑  e[i][k] * e[k][j], j >= i, j < n
+               |  k = i
+    c[i][j]  = |
+               |    0, rest
+               |
+
+ Deci noua formula este cea descrisa mai sus.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Neoptimizata  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    Implemenarea neoptimizata reperinta doar transpunerea in cod a formulei
+matematice rescrise din sectiune "Matematica".
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Optimizare flah-uri >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    Pentru icc:
+    -O3 (clasic)
+    -funroll-loops si -hlo_unroll pentru a realiza loop unrolling
+    -hlo_prefetch pentru prefetching
+
+    Pentru gcc:
+    -O3 (clasic)
+    -faggressive-loop-optimizations
+    -fprefetch-loop-arrays pentru prefetching
+    -funroll-all-loops pentru loop unrolling
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<        BLAS         >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    Am folosit funtile :
+    *) cblas_dsyr2k pentru a calcula:
+        E = zerotr(TRANSPOSE(A) * B + TRANSPOSE(B) * A)
+    *) cblas_dgemm pentru a calcula:
+        C = E * E
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<       Optimizat     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    Optimizarile care le-am apicat au fost : "detectarea constantelor din bucle",
+"Accesul la vectori", "Optimizarea pentru accesul la memorie" plus am redus
+numarul de branch misprediction eliminand acel if, calculat complet matricea E
+si din motivul ca fiind simetrica in loca sa o pacurg o linie pot sa parcurg o
+coloana.
+    Cum trebui sa translatam matricea A, m-am gandit ca pot in acelasi timp sa
+transpun si matricea B, astfel o o sa optimizez accesul la memerie folosind
+cahe-ul, cum am vrut sa aplic acelasi truc si pentru a doua inmultire, am
+calculat matricea E completa( si am eliminat if-ul).
+    Formula devenind astfel :
+
+               n                      n
+    e[i][j] =  ∑ a[i][k] * b[j][k] +  ∑ a[j][k] * b[i][k]
+             k = 0                  k = 0
+
+
+    Valoara unei sume este retinuta intr-o variabila numita sum. Variabilele
+care le folosim cel mai mult a fost "marcate" cu keyword-ul register. (sum,
+pentru calcularea sumei; pa si pb pointeri catre elemetele curente; index-ii
+k si j sunt destul de folositi).
+
+    Pentru a aveam cat mai putine calcule cand acesam memoria am folosint
+pointerii : origin_pa retine adresa de inceput a unui linii din A pentru
+pentru parcuregre; pa si pb indica adresa elementului curent din matrice, cum B
+este transpus deplasarea o sa fie liniara, si mai exista si in care doar retine
+i * N, pentru a mai calcula de fiecare data, totusi din teste a reiesit o
+imbunatatiere destul de mica pentru folosirea lui in.
+
+    Dupa calcularea lui E complet o sa arate asa:
+
++-------------------------------------------------------+
+|  e[1][1]      e[1][2]      e[1][3]  .......  e[1][n]  |
+|  e[1][2]      e[2][2]      e[2][3]  .......  e[2][n]  |
+|  e[1][3]      e[2][3]      e[3][3]  .......  e[3][n]  |
+|     :            :            :        :        :     |
+|e[1][n - 1]  e[2][n - 1]  e[3][n - 1].......e[n - 1][n]|
+|  e[1][n]      e[2][n]      e[3][n]            e[n][n] |
++-------------------------------------------------------+
+
+Se poate observa ca valorile pentru linea line[j][i:N] sunt egale cu cele de pe
+coloana col[i:N][j] de aici deplasare pe linie in loc de coloana.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Analiza perfomantei >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
++=====+===========+=========+==================+====================+==========+
+|  N  |   Type    |  Time   | Cache-references |  Cache-misses      |insn/cycle|
++=====+===========+=========+==================+====================+==========+
+|     | neopt_gcc |0.793830 |   3.025.361      |168.963  :  5,585%  |  2,92    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_gcc |0.151437 |  21.759.920      |192.984 :   0,887%  |   2,52   |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_gcc |0.103174 |   2.066.568      |106.596 :  5,158 %  |   1,21   |
++     +-----------+---------+------------------+--------------------+----------+
+| 400 | blas_gcc  |0.038060 |   2.867.414      |436.047 : 15,207 %  |   0,20   |
++     +-----------+---------+------------------+--------------------+----------+
+|     | neopt_icc |0.784020 |   3.166.891      |402.008 : 12,694 %  |   2,65   |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_icc |0.351336 |  22.277.423      |923.985 : 4,148 %   |  2,33    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_icc |0.103174 | 1.985.609        |154.473: 7,780 %    |  1,58    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | blas_icc  |0.037855 |                  |                    |          |
++=====+===========+=========+==================+====================+==========+
+|     | neopt_gcc |2.694320 |   9.037.362      |  464.786 : 5,143%  |  2,94    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_gcc |0.490219 |  72.510.133      |8.213.460: 11,327 % |  2,39    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_gcc |0.342101 |  7.748.842       |442.567 : 5,711%    | 1,18     |
++     +-----------+---------+------------------+--------------------+----------+
+| 600 | blas_gcc  |0.121450 |  6.501.480       |1.385.818 : 21,315% | 3,02     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | neopt_icc |2.720769 | 9.288.371        |943.359 : 10,156 %  | 1,69     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_icc |1.162717 |   71.543.040     |8.932.946: 12,486 % |  2,12    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_icc |0.342101 |  7.588.216       |329.177:  4,338 %   |  1,60    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | blas_icc  |0.122176 |                  |                    |          |
++=====+===========+=========+==================+====================+==========+
+|     | neopt_gcc |6.111427 |   29.901.215     |2.293.013  :  7,669%| 1,82     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_gcc |1.155845 |  173.230.838     |50.089.920 : 28,915%| 2,37     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_gcc |1.141683 |  20.812.058      | 666.199 : 3,201%   |  1,07    |
++     +-----------+---------+------------------+--------------------+----------+
+| 800 | blas_gcc  |0.282687 |  14.162.756      |4.765.823: 33,650%  |  3,08    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | neopt_icc |7.902526 | 32.933.344       |1.261.527 : 3,831%  |2,61      |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_icc |2.650951 | 175.849.377      |52.640.259 : 29,935%|2,35      |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_icc |1.141683 | 23.272.792       | 618.174 : 2,656 %  |    1,56  |
++     +-----------+---------+------------------+--------------------+----------+
+|     | blas_icc  |0.283417 |                  |                    |          |
++=====+===========+=========+==================+====================+==========+
+|     | neopt_gcc |11.785552|   46.612.023     |4.749.518 : 10,189% |  2,62    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_gcc |2.216966 |  334.108.016     |145.415.465 :43,523%| 2,21     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_gcc |2.283128 |  36.460.766      |3.709.937 : 10,175% | 1,12     |
++     +-----------+---------+------------------+--------------------+----------+
+| 1000| blas_gcc  |0.549114 |  24.385.061      |8.885.036 : 36,436% | 2,81     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | neopt_icc |11.605030|47.800.037        |4.140.446 : 8,662 % |2,49      |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_icc |4.917546 |  342.827.756     |153.616.980: 44,809%| 2,36     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_icc |2.283128 | 36.940.505       | 4.415.245 : 11,952%|  1,23    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | blas_icc  |0.548394 |                  |                    |          |
++=====+===========+=========+==================+====================+==========+
+|     | neopt_gcc |19.922344|   102.179.120    |20.113.729 : 19,685%| 1,83     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_gcc |3.712210 |   589.358.832    |319.010.894: 54,128%| 0,44     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_gcc |3.632585 | 71.668.651       |13.872.710 : 19,357%| 0,99     |
++     +-----------+---------+------------------+--------------------+----------+
+| 1200| blas_gcc  |0.943959 | 41.317.021       |14.870.982 : 35,992%|  3,21    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | neopt_icc |19.785299|115.878.669       |20.187.352:  17,421%|1,25      |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_icc |8.384445 | 588.871.499      |324.102.858: 55,038%| 2,05     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_icc |3.632585 | 69.774.181       |9.539.239 : 13,672 %|  1,62    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | blas_icc  |0.944048 |                  |                    |          |
++=====+===========+=========+==================+====================+==========+
+|     | neopt_gcc |32.591408|  159.604.248     |44.693.197 : 28,003%| 1,16     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_gcc |6.274561 | 915.627.679      |525.152.941: 57,354%| 2,35     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_gcc |5.804671 | 109.534.482      |33.421.576:30,512 % | 1,01     |
++     +-----------+---------+------------------+--------------------+----------+
+| 1400| blas_gcc  |1.502165 |63.784.083        |22.853.015: 35,829% | 3,20     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | neopt_icc |31.338703|  150.870.274     | 44.216.551: 29,308%|1,15      |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_icc |14.545969| 962.875.251      |588.939.714: 61,165%| 0,51     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_icc |5.804671 | 104.033.730      | 27.980.454:26,896 %| 0,51     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | blas_icc  |1.492232 |                  |                    |          |
++=====+===========+=========+==================+====================+==========+
+|     | neopt_gcc |59.533485|  1.410.430.366   |138.492.366 : 9,819%| 0,62     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_gcc |8.863222 | 1.378.711.825    |842.227.626: 61,088%| 2,24     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_gcc |10.295949|  914.709.737     |87.177.770 : 9,531% |  0,54    |
++     +-----------+---------+------------------+--------------------+----------+
+| 1600| blas_gcc  |2.195818 | 100.831.224      |34.502.196 : 34,218%| 3,24     |
++     +-----------+---------+------------------+--------------------+----------+
+|     | neopt_icc |58.664642|1.443.314.980     |144.135.756:9,986 % |  0,62    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_m_icc |19.935280|1.413.549.256     |883.601.470: 62,509%|  2,34    |
++     +-----------+---------+------------------+--------------------+----------+
+|     | opt_f_icc |10.295949| 782.326.776      | 11,026 %           |   0,29   |
++     +-----------+---------+------------------+--------------------+----------+
+|     | blas_icc  |2.194242 |                  |                    |          |
++=====+===========+=========+==================+====================+==========+
+
+	Observatie : In coloana Cache-misses, dupa valuare si : este si raport
+dintre  Cache-misses/Cache-references, rata de cache-miss.
+	Datele despre cache le-am optinut local, ele variind destul de mult, asa
+ca am hotarat sa fac grafice decat pentru timpi optinuti pe fep.
+	Se pot observa date asemanatore intre gcc si icc, singura diferenta 
+fiind timpul pentru optim, pt icc este dublu. O explicatie care am gasit-o este
+faptul ca daca modific daca o variabila este sau nu register nu afecteaza timpul
+,la gcc il afecteza in rau, de aici m-am gandit ca poate este ignorat keyword-ul
+register de catre icc. Se poate vedea varianta cea mai buna este ce a folosind 
+blas, creare o rata de cache-misses, prima find implematarea optimala.
+	Timpul pentru implementare optimala este egal, mai bun la utilmul test
+decat cel folosind flag-uri de optimizare, pentru gcc find discutia, in conditile
+in care algoritmul nu a fost modificat de loc pt optimal, facandu-se mai mult 
+calcule decat cel neoptimal., asa ca pot sa spun ca optimizarile apicate au
+functionat. Se foloseste mai mult cache-ul in implementare optimala decat la
+celelate implementare, aceste fiind si scopul ei. A exitat flutuati de la rula
+consecutive dupa cum reiese din datele din directire data.
+	Ce am mai interland lucru este ca am rulat pentru valori de la 
+1590-1600 pt neoptimizat gcc si icc, daca pana la 1599 timpul era pana in 
+50-51 s, la 1600 se optine ,tot timpul , valori intre 59-61 s. Probali acolo
+se depaseste dimensiuna cache-ului. Nu am pus datele pt blas-icc pt nu am
+put sa folosesc versiunea de blas de fep, asa ca am descat pt gcc, iar restul
+executabilelor au fost compilate pe fep si rulate pe calculatorul pentru
+a avea o relevata si o legatura cu timpi optiniti pe fep.
+
+	
+	In directorul data sunt timpil de rulare de pe fep de la utimarulare si
+un script in python care a create graficele din directorul grafice.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<       Resurse       >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+https://en.wikipedia.org/wiki/Transpose
+
+https://en.wikipedia.org/wiki/Loop_unrolling
+
+https://en.wikipedia.org/wiki/Prefetching
+
+https://www.youtube.com/watch?v=fZZnB5u3x40
+
+http://cs.curs.pub.ro/wiki/asc/asc:lab5:index
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -1,0 +1,8 @@
+build:
+	gcc task1a.c -o task1a -lm
+
+run:
+	./tastk1a ${ARGS}
+
+clean:
+	rm -fr task1a
